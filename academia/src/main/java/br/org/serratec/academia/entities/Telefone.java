@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,19 +28,19 @@ public class Telefone {
 	
 	@Column(name = "numero")
 	private int numero;
-	
-	@Column(name = "instrutor_id")
-	private String instrutor;
+
+	@OneToOne
+	@JoinColumn(name = "instrutor_id")
+	private Instrutor instrutor;
 	
 	public Telefone() {
 		super();
 	}
 
-	public Telefone(Integer telefoneId, int numero, String instrutor) {
+	public Telefone(Integer telefoneId, int numero) {
 		super();
 		this.telefoneId = telefoneId;
 		this.numero = numero;
-		this.instrutor = instrutor;
 	}
 
 	public Integer getTelefoneId() {
@@ -55,14 +57,6 @@ public class Telefone {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
-	}
-
-	public String getInstrutor() {
-		return instrutor;
-	}
-
-	public void setInstrutor(String instrutor) {
-		this.instrutor = instrutor;
 	}
 	
 }

@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,21 +32,17 @@ public class Turma {
 	@Column(name = "dia_semana")
 	private String diaSemana;
 	
-	@Column(name = "instrutor_id")
-	private String instrutor;
-	
-	
+	@ManyToOne
+	@JoinColumn (name = "instrutor_id")
+	private Instrutor instrutor;
 
 	public Turma() {
-		super();
 	}
 
-	public Turma(Integer turmaId, String nomeDisciplina, String diaSemana, String instrutor) {
-		super();
+	public Turma(Integer turmaId, String nomeDisciplina, String diaSemana) {
 		this.turmaId = turmaId;
 		this.nomeDisciplina = nomeDisciplina;
 		this.diaSemana = diaSemana;
-		this.instrutor = instrutor;
 	}
 
 	public Integer getTurmaId() {
@@ -71,11 +69,12 @@ public class Turma {
 		this.diaSemana = diaSemana;
 	}
 
-	public String getInstrutor() {
+	protected Instrutor getInstrutor() {
 		return instrutor;
 	}
 
-	public void setInstrutor(String instrutor) {
+	protected void setInstrutor(Instrutor instrutor) {
 		this.instrutor = instrutor;
 	}
+
 }

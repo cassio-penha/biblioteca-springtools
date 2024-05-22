@@ -1,5 +1,7 @@
 package br.org.serratec.academia.entities;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -8,10 +10,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "intrutor")
+@Table(name = "instrutor")
 @JsonIdentityInfo(
 		generator = ObjectIdGenerators.PropertyGenerator.class,
 		property = "instrutorId",
@@ -33,12 +36,13 @@ public class Instrutor {
 	@Column(name = "telefone")
 	private String telefone;
 	
+	@OneToMany(mappedBy = "instrutor")
+	private List<Turma> turma;
+	
 	public Instrutor() {
-		super();
 	}
 		
 	public Instrutor(Integer instrutorId, String rg, String nomeInstrutor, String telefone) {
-		super();
 		this.instrutorId = instrutorId;
 		this.rg = rg;
 		this.nomeInstrutor = nomeInstrutor;
